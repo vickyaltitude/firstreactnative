@@ -1,20 +1,27 @@
 import { useState } from 'react';
 import {  StyleSheet} from 'react-native';
 
-import { View,Text,Button,TextInput } from 'react-native';
+import { View,Text,ScrollView,FlatList} from 'react-native';
 
 export default function HomeScreen() {
    
-  const [text,setText] = useState('');
-
+ // const [text,setText] = useState('');
+  const alphabetArr = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+  const alphabetMap = alphabetArr.map((letter,ind) => ({letterText: letter,key: ind}) )
   return (
     <View style={styles.container}>
-
+     
+     
       <Text style={styles.textContainer}>
       Hello world
       </Text>
-      <TextInput onChangeText={(newText) => setText(newText)} style={styles.inputContainer} placeholder='type something...' />
-      <Text style={styles.textContainer}>{text}</Text>
+      <FlatList
+
+      data={alphabetMap}
+
+       renderItem={(letter) => <Text style={styles.letters}>{letter.item.letterText}</Text>}
+      />
+    
     </View>
   );
 }
@@ -24,7 +31,10 @@ const styles = StyleSheet.create({
   textContainer:{
    color: '#fff'
   },
-
+  letters:{
+    color: '#fff',
+    paddingBottom: 40
+  },
   inputContainer:{
     backgroundColor: '#fff'
   }
